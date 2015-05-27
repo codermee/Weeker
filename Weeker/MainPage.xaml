@@ -1,0 +1,82 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Weeker.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+	<phone:PhoneApplicationPage.Resources>
+		<DataTemplate x:Name="PickerFullItemTemplate">
+			<StackPanel>
+				<TextBlock Text="{Binding}" FontSize="46"/>
+			</StackPanel>
+		</DataTemplate>
+	</phone:PhoneApplicationPage.Resources>
+	<Grid x:Name="LayoutRoot" Background="Transparent">
+		
+        <!--Pivot Control-->
+        <controls:Pivot x:Name="MainPagePivot" Title="sample text">
+            <controls:PivotItem Header="{Binding Path=LocalizedResources.CurrentWeekHeader, Source={StaticResource Localization}}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="250" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="250" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding Path=LocalizedResources.WeekText, Source={StaticResource Localization}}" Grid.Column="1" Grid.Row="1" TextAlignment="Left" Foreground="{StaticResource PhoneAccentBrush}" FontSize="50" Margin="20,22,0,0"/>
+                    <TextBlock x:Name="WeekNumber" Grid.Column="1" Grid.Row="1" TextAlignment="Center" Foreground="{StaticResource PhoneAccentBrush}" FontSize="215" Text="29" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2">
+                        <TextBlock x:Name="DayOfWeekTextBlock" Text="MÅNDAG" FontWeight="Bold" Margin="0,0,5,0" />
+                        <TextBlock x:Name="DateTextBlock" Text="30 SEP" />
+                    </StackPanel>
+                </Grid>
+            </controls:PivotItem>
+            <controls:PivotItem Header="{Binding Path=LocalizedResources.TransformDateHeader, Source={StaticResource Localization}}">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding Path=LocalizedResources.TransformDateText, Source={StaticResource Localization}}" Grid.Column="0" Grid.Row="0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="{StaticResource PhoneFontSizeLarge}" Margin="12,0,0,0"/>
+                    <toolkit:DatePicker x:Name="DatePicker" ValueChanged="OnDatePickerValueChanged" Grid.Column="0" Grid.Row="0" BorderThickness="1" />
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60" />
+                            <RowDefinition Height="250" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="250" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="WeekText" Text="{Binding Path=LocalizedResources.WeekText, Source={StaticResource Localization}}" Grid.Column="1" Grid.Row="1" TextAlignment="Left" Margin="20,22,0,0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="50"/>
+                        <TextBlock x:Name="TransformedWeekNumber" Grid.Column="1" Grid.Row="1" TextAlignment="Center" Foreground="{StaticResource PhoneAccentBrush}" FontSize="215" Text="29"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2">
+                            <TextBlock x:Name="DateRange" Grid.Column="1" Grid.Row="1" TextAlignment="Center" FontWeight="Bold" Text="19 OKT - 25 OKT"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </controls:PivotItem>
+        </controls:Pivot>
+    </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem x:Name="AppBarSettingsMenuItem" Text="sample text" Click="OnAppBarSettingsMenuItemClick"/>
+                <shell:ApplicationBarMenuItem x:Name="AppBarAboutMenuItem" Text="sample text" Click="OnAppBarAboutMenuItemClick"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>
